@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="نقطة — منصة QR للطلبات والقوائم الرقمية للمطاعم الفلسطينية. قائمة عربية وإنجليزية، طباعة تلقائية للطلبات، تحليلات فورية، وبرنامج ولاء. Noqta is a QR menu and ordering platform built for Palestinian restaurants.">
+<link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>نقطة — قائمتك الرقمية في دقائق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta name="description" content="نقطة — منصة QR للطلبات والقوائم الرقمية للمطاعم الفلسطينية. قائمة عربية وإنجليزية، طباعة تلقائية للطلبات، تحليلات فورية، وبرنامج ولاء. Noqta is a QR menu and ordering platform built for Palestinian restaurants.">
+
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --forest:#283618;
+    --forest-ink:#1a2410;
+    --olive:#606c38;
+    --olive-soft:#8a9653;
+    --gold:#bc6c25;
+    --gold-deep:#9a5516;
+    --gold-soft:#dda15e;
+    --cream:#fefae0;
+    --cream-2:#f7f1cf;
+    --paper:#fffdf2;
+    --ink:#232414;
+    --ink-2:#4a4d35;
+    --ink-3:#6b6e52;
+    --brick:#a8432b;
+    --brick-soft:#f4d9cf;
+    --line:rgba(40,54,24,.12);
+    --line-2:rgba(40,54,24,.22);
+    --shadow-sm: 0 1px 2px rgba(40,54,24,.06), 0 2px 6px rgba(40,54,24,.04);
+    --shadow-md: 0 2px 6px rgba(40,54,24,.08), 0 12px 28px -12px rgba(40,54,24,.18);
+    --shadow-lg: 0 8px 24px -8px rgba(40,54,24,.18), 0 30px 60px -24px rgba(40,54,24,.28);
+    --radius: 14px;
+    --radius-lg: 22px;
+    --radius-xl: 28px;
+    --maxw: 1240px;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:"IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01","cv11";
+    overflow-x: hidden;
+  }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; direction:ltr; unicode-bidi:isolate; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+  img,svg{ display:block; }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position: sticky; top:0; z-index:50;
+    background: color-mix(in oklab, var(--cream) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 72px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px; color:var(--forest);
+    font-weight:700; font-size: 26px; letter-spacing:-.01em;
+  }
+  .logo-mark{
+    width: 34px; height: 34px; border-radius: 10px;
+    background: var(--forest);
+    display:grid; place-items:center; color:var(--cream);
+    font-weight:700; font-size:18px;
+    position: relative;
+  }
+  .logo-mark::after{
+    content:""; position:absolute; inset:auto 6px 6px auto;
+    width:7px; height:7px; border-radius:50%; background: var(--gold);
+  }
+  .nav-links{
+    display:flex; gap: 34px; align-items:center;
+    font-size: 15.5px; color: var(--ink-2);
+  }
+  .nav-links a{ padding:8px 2px; position:relative; transition: color .2s; }
+  .nav-links a:hover{ color: var(--forest); }
+  .nav-cta{
+    background: var(--gold); color: var(--cream);
+    padding: 11px 20px; border-radius: 999px;
+    font-weight:600; font-size: 15px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 6px 14px -6px rgba(188,108,37,.6);
+    transition: transform .15s ease, background .2s;
+  }
+  .nav-cta:hover{ background: var(--gold-deep); transform: translateY(-1px); }
+  .nav-burger{ display:none; }
+  .mobile-menu{ display:none; }
+
+  @media (max-width: 880px){
+    .nav-links{ display:none; }
+    .nav-cta{ display:none !important; }
+    .nav-inner{ height: 64px; }
+    .nav-burger{ display:inline-flex; width:40px; height:40px; border:1px solid var(--line-2); border-radius:10px; align-items:center; justify-content:center; }
+    .nav-burger span{ width:16px; height:1.5px; background: var(--forest); box-shadow: 0 5px 0 var(--forest), 0 -5px 0 var(--forest); display:block; }
+    .mobile-menu{ padding: 10px 28px 20px; border-bottom:1px solid var(--line); background: var(--cream); }
+    .mobile-menu.open{ display:block; }
+    .mobile-menu a{ display:block; padding:12px 2px; border-bottom: 1px solid var(--line); color: var(--forest); font-weight:500;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position: relative;
+    padding: 72px 0 96px;
+    background:
+      radial-gradient(1000px 500px at 85% -10%, rgba(221,161,94,.25), transparent 60%),
+      radial-gradient(800px 500px at 10% 110%, rgba(96,108,56,.22), transparent 60%),
+      linear-gradient(180deg, var(--cream), var(--cream-2));
+    overflow: hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center;
+  }
+  @media (max-width: 960px){ .hero-grid{ grid-template-columns: 1fr; gap: 48px; } .hero{ padding: 48px 0 72px; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    background: rgba(40,54,24,.06);
+    border: 1px solid var(--line-2);
+    padding: 7px 14px; border-radius: 999px;
+    font-size: 13.5px; color: var(--forest); font-weight:500;
+  }
+  .eyebrow-dot{ width:7px; height:7px; border-radius:50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(188,108,37,.15); }
+
+  h1.hero-title{
+    margin: 20px 0 18px;
+    font-size: clamp(38px, 5.2vw, 64px);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--forest-ink);
+  }
+  .hero-title em{
+    font-style: normal;
+    background: linear-gradient(180deg, transparent 62%, rgba(188,108,37,.35) 62% 92%, transparent 92%);
+    padding: 0 .15em;
+  }
+  .hero-sub{
+    font-size: clamp(17px, 1.5vw, 19.5px);
+    line-height: 1.75;
+    color: var(--ink-2);
+    max-width: 54ch;
+  }
+
+  .hero-ctas{ display:flex; gap:14px; margin-top: 32px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 15px 24px; border-radius: 12px;
+    font-weight:600; font-size: 16px;
+    transition: transform .15s ease, box-shadow .2s, background .2s;
+    border: 1px solid transparent;
+  }
+  .btn-primary{
+    background: var(--gold); color: var(--cream);
+    box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 10px 24px -10px rgba(188,108,37,.7);
+  }
+  .btn-primary:hover{ background: var(--gold-deep); transform: translateY(-1px); }
+  .btn-secondary{
+    background: transparent; color: var(--forest);
+    border-color: var(--line-2);
+  }
+  .btn-secondary:hover{ background: rgba(40,54,24,.05); }
+  .btn svg{ width:18px; height:18px; }
+
+  .trust{
+    margin-top: 36px;
+    display:flex; align-items:center; gap: 18px;
+    color: var(--ink-3); font-size: 13.5px;
+  }
+  .trust-dots{ display:flex; }
+  .trust-dots span{
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 2px solid var(--cream);
+    background: linear-gradient(135deg, var(--olive-soft), var(--olive));
+    margin-left: -8px;
+  }
+  .trust-dots span:nth-child(2){ background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
+  .trust-dots span:nth-child(3){ background: linear-gradient(135deg, #c9a06b, #7a4b1a); }
+  .trust-dots span:nth-child(4){ background: linear-gradient(135deg, #8aa866, #3e4d22); }
+
+  /* ---------- phone mock ---------- */
+  .phone-stage{
+    position: relative;
+    min-height: 620px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .phone-stage::before{
+    content:""; position:absolute; inset: 0;
+    background:
+      radial-gradient(closest-side at 50% 50%, rgba(40,54,24,.12), transparent 70%);
+    filter: blur(6px);
+  }
+  .qr-floater{
+    position:absolute; z-index: 3;
+    top: 40px; right: -10px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px; padding: 14px;
+    box-shadow: var(--shadow-md);
+    transform: rotate(6deg);
+    animation: floatA 7s ease-in-out infinite;
+  }
+  @keyframes floatA{ 0%,100%{ transform: rotate(6deg) translateY(0);} 50%{ transform: rotate(6deg) translateY(-10px);} }
+  .qr-floater .qr-label{
+    font-size: 11px; color: var(--ink-3); text-align:center; margin-top:8px;
+    letter-spacing: .02em;
+  }
+  .qr-canvas{ width: 120px; height: 120px; border-radius: 8px; }
+
+  .chip-floater{
+    position:absolute; z-index: 3;
+    bottom: 90px; left: -20px;
+    background: var(--forest); color: var(--cream);
+    border-radius: 16px; padding: 12px 16px;
+    box-shadow: var(--shadow-md);
+    display:flex; align-items:center; gap:12px;
+    transform: rotate(-4deg);
+    animation: floatB 6s ease-in-out infinite .5s;
+  }
+  @keyframes floatB{ 0%,100%{ transform: rotate(-4deg) translateY(0);} 50%{ transform: rotate(-4deg) translateY(-8px);} }
+  .chip-floater .pulse{
+    width:10px; height:10px; border-radius:50%; background: var(--gold-soft);
+    box-shadow: 0 0 0 0 rgba(221,161,94,.7); animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(221,161,94,.7);} 70%{ box-shadow: 0 0 0 10px rgba(221,161,94,0);} 100%{ box-shadow: 0 0 0 0 rgba(221,161,94,0);} }
+  .chip-floater .txt{ font-size:13.5px; font-weight:500; }
+  .chip-floater .num{ font-size:18px; font-weight:700; font-family:"IBM Plex Mono", monospace; direction:ltr; }
+
+  .phone{
+    width: 300px; height: 610px;
+    background: #1a1f12;
+    border-radius: 48px;
+    padding: 10px;
+    position: relative;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.04) inset;
+  }
+  .phone-screen{
+    width: 100%; height: 100%;
+    border-radius: 40px;
+    background: var(--cream);
+    overflow: hidden;
+    position: relative;
+    display:flex; flex-direction:column;
+  }
+  .phone-notch{
+    position:absolute; top: 8px; left:50%; transform: translateX(-50%);
+    width: 100px; height: 22px; background: #0f130a; border-radius: 12px;
+    z-index: 5;
+  }
+  .ph-top{
+    padding: 36px 18px 10px; display:flex; align-items:center; justify-content:space-between;
+    font-size: 11px; color: var(--ink-3);
+  }
+  .ph-header{
+    padding: 6px 18px 14px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  .ph-shop{ display:flex; align-items:center; gap:10px; }
+  .ph-shop-logo{
+    width: 34px; height: 34px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    display:grid; place-items:center; color: var(--cream); font-weight:700; font-size:14px;
+  }
+  .ph-shop-name{ font-weight: 600; font-size: 14px; color: var(--forest-ink); }
+  .ph-shop-meta{ font-size: 11px; color: var(--ink-3); margin-top:2px; }
+  .ph-cart{
+    width: 34px; height: 34px; border-radius: 50%; background: var(--forest);
+    display:grid; place-items:center; color: var(--cream);
+    position: relative;
+  }
+  .ph-cart .badge{
+    position:absolute; top:-4px; left:-4px; background: var(--gold); color: var(--cream);
+    font-size: 10px; font-weight: 700; border-radius: 999px; padding: 1px 6px; border: 2px solid var(--cream);
+  }
+  .ph-tabs{
+    display:flex; gap: 6px; padding: 12px 14px; overflow:hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .ph-search{
+    margin: 12px 14px 8px;
+    display:flex; align-items:center; gap:10px;
+    background: #efe8c2;
+    border: 1px solid rgba(40,54,24,.14);
+    border-radius: 12px;
+    padding: 11px 14px;
+    color: #6b6e52;
+    font-size: 13px;
+  }
+  .ph-search svg{ flex:0 0 auto; color: #6b6e52; }
+  .ph-search .ph-search-ph{ flex:1; }
+  .ph-cat-header{
+    font-size: 13px; font-weight: 700; color: var(--forest-ink);
+    padding: 6px 4px 4px;
+    display:flex; align-items:center; gap:8px;
+    letter-spacing: .01em;
+  }
+  .ph-cat-header::after{
+    content:""; flex:1; height:1px; background: var(--line);
+  }
+  .ph-tab{
+    font-size: 12px; padding: 7px 12px; border-radius: 999px;
+    background: rgba(40,54,24,.06); color: var(--ink-2); white-space: nowrap;
+  }
+  .ph-tab.active{ background: var(--forest); color: var(--cream); }
+  .ph-list{ flex:1; overflow-y:auto; padding: 12px; display:flex; flex-direction:column; gap: 10px; }
+  .ph-item{
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 14px; padding: 10px; display:grid; grid-template-columns: 56px 1fr auto; gap: 10px; align-items:center;
+  }
+  .ph-item-img{
+    width: 56px; height: 56px; border-radius: 10px;
+    background: repeating-linear-gradient(45deg, #e7dfb0 0 6px, #efe7b8 6px 12px);
+    position: relative; overflow:hidden;
+  }
+  .ph-item-img::after{
+    content:""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 55%, rgba(188,108,37,.4), transparent 60%);
+  }
+  .ph-item-info .n{ font-size: 13px; font-weight:600; color: var(--forest-ink); }
+  .ph-item-info .d{ font-size: 11px; color: var(--ink-3); margin-top: 2px; line-height:1.5; }
+  .ph-item-price{
+    display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+  }
+  .ph-item-price .p{ font-size: 13px; font-weight:700; color: var(--gold-deep); font-family:"IBM Plex Mono", monospace; }
+  .ph-add{
+    width: 28px; height: 28px; border-radius: 50%; background: var(--forest); color: var(--cream);
+    display:grid; place-items:center; font-size: 18px; line-height: 1;
+  }
+  .ph-footer{
+    padding: 12px 14px 16px;
+    border-top: 1px solid var(--line);
+    background: var(--cream-2);
+  }
+  .ph-order-btn{
+    width: 100%; padding: 12px; border-radius: 12px;
+    background: var(--gold); color: var(--cream); font-weight: 600; font-size: 14px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .ph-order-btn .count{ background: rgba(0,0,0,.18); padding: 3px 10px; border-radius: 999px; font-size: 12px; font-family:"IBM Plex Mono", monospace;}
+
+  @media (max-width: 500px){
+    .qr-floater{ right: 10px; top: 10px; padding:10px; }
+    .qr-canvas{ width: 84px; height: 84px; }
+    .chip-floater{ left: 10px; bottom: 20px; padding:10px 12px; }
+    .phone{ transform: scale(.92); }
+  }
+
+  /* ---------- section shell ---------- */
+  section.block{ padding: 96px 0; }
+  @media (max-width:760px){ section.block{ padding: 72px 0; } }
+  .section-head{ text-align:center; margin-bottom: 56px; }
+  .section-eyebrow{
+    display:inline-block; font-size: 13px; letter-spacing: .04em;
+    color: var(--gold-deep); font-weight: 600;
+    padding: 6px 14px; background: rgba(188,108,37,.1); border-radius: 999px;
+  }
+  .section-title{
+    font-size: clamp(28px, 3.4vw, 42px); font-weight:700; line-height: 1.2;
+    color: var(--forest-ink);
+    margin: 18px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .section-kicker{
+    color: var(--ink-2); font-size: 17px; line-height: 1.7; max-width: 60ch; margin: 0 auto;
+  }
+
+  /* ---------- problem ---------- */
+  .problem{ background: var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .problem-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width:880px){ .problem-grid{ grid-template-columns: 1fr; } }
+  .p-card{
+    background: #fff7f2;
+    border: 1px solid rgba(168,67,43,.18);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    position: relative;
+    transition: transform .2s ease;
+  }
+  .p-card:hover{ transform: translateY(-4px); }
+  .p-card .num{
+    position:absolute; top: 24px; left: 24px;
+    font-family:"IBM Plex Mono", monospace; font-size: 12px; color: var(--brick); opacity:.6;
+  }
+  .p-glyph{
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--brick-soft);
+    display:grid; place-items:center;
+    color: var(--brick);
+    margin-bottom: 22px;
+  }
+  .p-glyph svg{ width: 26px; height: 26px; }
+  .p-card h3{
+    font-size: 20px; font-weight:600; margin: 0 0 8px; color: var(--forest-ink);
+    line-height: 1.45;
+  }
+  .p-card p{ color: var(--ink-2); font-size: 15px; line-height: 1.7; margin:0; }
+
+  /* ---------- solution ---------- */
+  .solution{
+    background: var(--forest);
+    color: var(--cream);
+    position: relative;
+    overflow:hidden;
+  }
+  .solution::before{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(600px 300px at 90% 0%, rgba(188,108,37,.18), transparent 60%),
+      radial-gradient(600px 300px at 10% 100%, rgba(96,108,56,.4), transparent 60%);
+    pointer-events:none;
+  }
+  .solution .section-title{ color: var(--cream); }
+  .solution .section-kicker{ color: rgba(254,250,224,.75); }
+  .solution .section-eyebrow{ color: var(--gold-soft); background: rgba(221,161,94,.15); }
+  .sol-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    position: relative;
+  }
+  @media (max-width:880px){ .sol-grid{ grid-template-columns: 1fr; } }
+  .s-card{
+    background: rgba(254,250,224,.04);
+    border: 1px solid rgba(254,250,224,.12);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    backdrop-filter: blur(4px);
+    transition: transform .2s, background .2s;
+  }
+  .s-card:hover{ background: rgba(254,250,224,.08); transform: translateY(-4px); }
+  .s-glyph{
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--gold);
+    color: var(--cream);
+    display:grid; place-items:center; margin-bottom: 22px;
+  }
+  .s-glyph svg{ width: 26px; height: 26px; }
+  .s-card h3{ font-size: 20px; font-weight:600; margin: 0 0 8px; line-height: 1.45; }
+  .s-card p{ color: rgba(254,250,224,.7); font-size: 15px; line-height: 1.7; margin:0; }
+  .sol-connector{
+    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+    display:flex; align-items:center; gap: 10px;
+    background: var(--gold); color: var(--cream);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ---------- features ---------- */
+  .features-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width:980px){ .features-grid{ grid-template-columns: repeat(2, 1fr);} }
+  @media (max-width:620px){ .features-grid{ grid-template-columns: 1fr;} }
+  .f-card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    position: relative;
+  }
+  .f-card:hover{ transform: translateY(-3px); border-color: var(--line-2); box-shadow: var(--shadow-md); }
+  .f-index{
+    font-family:"IBM Plex Mono", monospace; font-size: 12px;
+    color: var(--ink-3);
+    position:absolute; top: 24px; left: 24px;
+  }
+  .f-glyph{
+    width: 54px; height: 54px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(96,108,56,.12), rgba(40,54,24,.06));
+    border: 1px solid var(--line);
+    display:grid; place-items:center;
+    color: var(--forest);
+    margin-bottom: 22px;
+  }
+  .f-glyph svg{ width: 26px; height: 26px; }
+  .f-card h3{
+    font-size: 19px; font-weight:600; margin: 0 0 8px;
+    color: var(--forest-ink);
+  }
+  .f-card p{ color: var(--ink-2); font-size: 14.5px; line-height: 1.7; margin:0; }
+
+  /* ---------- pricing ---------- */
+  .pricing{
+    background: linear-gradient(180deg, var(--cream), var(--cream-2));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .price-card{
+    max-width: 640px; margin: 0 auto;
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-xl);
+    padding: 44px;
+    position: relative;
+    box-shadow: 0 30px 80px -30px rgba(188,108,37,.4);
+  }
+  .price-badge{
+    position: absolute; top: -16px; right: 32px;
+    background: var(--gold); color: var(--cream);
+    padding: 8px 16px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    display:flex; align-items:center; gap:8px;
+  }
+  .price-badge .flicker{
+    width: 8px; height: 8px; border-radius: 50%; background: var(--cream);
+    animation: flick 1.4s ease-in-out infinite;
+  }
+  @keyframes flick{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .price-head{ display:flex; align-items:baseline; gap: 14px; flex-wrap:wrap; }
+  .price-main{
+    font-family:"IBM Plex Mono", monospace; font-size: 68px; font-weight:700;
+    color: var(--forest-ink); letter-spacing: -0.02em;
+  }
+  .price-main .cur{ font-size: 32px; color: var(--gold-deep); vertical-align: super; margin-right: 4px;}
+  .price-period{ color: var(--ink-2); font-size: 16px; }
+  .price-tag{
+    margin-top: 8px; color: var(--olive); font-weight:500; font-size: 15px;
+  }
+  .price-list{
+    list-style: none; padding: 0; margin: 26px 0;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 10px 24px;
+  }
+  @media (max-width: 560px){ .price-list{ grid-template-columns: 1fr; } }
+  .price-list li{
+    display:flex; align-items:flex-start; gap: 10px;
+    font-size: 15px; color: var(--ink);
+  }
+  .price-list .tick{
+    width: 20px; height: 20px; border-radius: 50%; background: var(--forest);
+    display:grid; place-items:center; flex: 0 0 auto; margin-top: 2px;
+  }
+  .price-list .tick svg{ width: 11px; height: 11px; color: var(--cream); }
+  .price-cta{
+    display:block; width:100%; text-align:center;
+    padding: 16px; border-radius: 12px;
+    background: var(--gold); color: var(--cream); font-weight:600; font-size: 16px;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 10px 24px -10px rgba(188,108,37,.7);
+  }
+  .price-cta:hover{ background: var(--gold-deep); transform: translateY(-1px); }
+  .price-after{ text-align:center; color: var(--ink-3); font-size: 13.5px; margin-top: 18px; }
+  .spots-strip{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    background: rgba(188,108,37,.08);
+    border: 1px dashed rgba(188,108,37,.4);
+    border-radius: 12px; padding: 12px 16px; margin-top: 18px;
+    font-size: 14px;
+  }
+  .spots-bar{ flex:1; height: 6px; background: rgba(188,108,37,.15); border-radius: 999px; overflow:hidden; }
+  .spots-fill{ height: 100%; width: 68%; background: var(--gold); border-radius: 999px; }
+  .spots-num{ font-family:"IBM Plex Mono", monospace; font-weight: 600; color: var(--gold-deep); }
+
+  /* ---------- demo form ---------- */
+  .demo{
+    background: var(--forest);
+    color: var(--cream);
+    position: relative; overflow:hidden;
+  }
+  .demo::before{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(800px 400px at 90% 110%, rgba(188,108,37,.25), transparent 60%),
+      radial-gradient(700px 360px at 10% -10%, rgba(96,108,56,.35), transparent 60%);
+    pointer-events: none;
+  }
+  .demo-grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items:center; position:relative;
+  }
+  @media (max-width: 900px){ .demo-grid{ grid-template-columns: 1fr; gap: 40px; } }
+  .demo-copy h2{
+    font-size: clamp(30px, 3.6vw, 44px); line-height:1.2; margin: 14px 0 16px; font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .demo-copy p{ color: rgba(254,250,224,.75); line-height:1.75; font-size: 17px; margin: 0 0 24px; }
+  .demo-bullets{ list-style:none; padding:0; margin: 0; display:flex; flex-direction:column; gap: 12px; }
+  .demo-bullets li{ display:flex; gap: 12px; align-items:center; font-size: 15px; color: rgba(254,250,224,.85);}
+  .demo-bullets .d{ width:6px; height:6px; background: var(--gold-soft); border-radius: 50%; }
+
+  .form-card{
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: var(--radius-xl);
+    padding: 36px;
+    box-shadow: var(--shadow-lg);
+  }
+  .form-card h3{
+    font-size: 22px; font-weight: 600; color: var(--forest-ink);
+    margin: 0 0 6px;
+  }
+  .form-card .sub{ color: var(--ink-2); font-size: 14.5px; margin-bottom: 22px; }
+  .field{ display:block; margin-bottom: 16px; }
+  .field label{ display:block; font-size: 13.5px; color: var(--ink-2); margin-bottom: 6px; font-weight: 500; }
+  .field input{
+    width: 100%; padding: 14px 16px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-family: inherit; font-size: 15.5px; color: var(--ink);
+    direction: rtl;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .field input::placeholder{ color: var(--ink-3); }
+  .field input:focus{ outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(188,108,37,.15); }
+  .field input[type="tel"]{ direction: ltr; text-align: right; font-family:"IBM Plex Mono", monospace; }
+  .field.error input{ border-color: var(--brick); background: #fff7f4; }
+  .field .err-msg{ color: var(--brick); font-size: 12.5px; margin-top: 6px; display:none; }
+  .field.error .err-msg{ display:block; }
+  .submit{
+    width:100%; margin-top: 6px;
+    padding: 16px; border-radius: 12px;
+    background: var(--gold); color: var(--cream);
+    font-size: 16px; font-weight: 600;
+    display: flex; align-items:center; justify-content:center; gap: 10px;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 10px 24px -10px rgba(188,108,37,.7);
+  }
+  .submit:hover{ background: var(--gold-deep); transform: translateY(-1px); }
+  .submit:disabled{ opacity:.8; cursor: wait; }
+  .form-note{ color: var(--ink-3); font-size: 12.5px; text-align:center; margin-top: 12px; }
+
+  .success-state{
+    display:none;
+    text-align:center; padding: 20px 10px;
+  }
+  .form-card.success .form-body{ display:none; }
+  .form-card.success .success-state{ display:block; }
+  .success-state .ok{
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(96,108,56,.1); color: var(--olive);
+    display:grid; place-items:center; margin: 0 auto 16px;
+  }
+  .success-state h4{ font-size: 22px; color: var(--forest-ink); margin: 0 0 8px; }
+  .success-state p{ color: var(--ink-2); font-size: 15px; line-height:1.7; margin:0; }
+
+  /* ---------- footer ---------- */
+  footer.foot{
+    padding: 56px 0 36px;
+    background: var(--cream-2);
+    border-top: 1px solid var(--line);
+  }
+  .foot-grid{
+    display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px;
+  }
+  @media (max-width: 760px){ .foot-grid{ grid-template-columns: 1fr; gap: 28px; } }
+  .foot h4{ font-size: 14px; color: var(--forest-ink); margin: 0 0 14px; font-weight: 600; }
+  .foot ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 10px; }
+  .foot a{ color: var(--ink-2); font-size: 14px; }
+  .foot a:hover{ color: var(--forest); }
+  .foot-brand p{ color: var(--ink-2); font-size: 14px; margin: 12px 0 0; max-width: 34ch; line-height: 1.7; }
+  .foot-bottom{
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-size: 13px; color: var(--ink-3);
+  }
+  .foot-bottom .powered{ display:flex; align-items:center; gap:8px; }
+  .foot-bottom .powered b{ color: var(--forest); font-weight:600; }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity: 1; transform: none; }
+
+</style>
+</head>
+<body data-screen-label="01 Landing">
+
+<!-- ============ NAV ============ -->
+<nav class="nav" data-screen-label="Nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top" aria-label="نقطة">
+      <span class="logo-mark">ن</span>
+      <span>نقطة</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">المميزات</a>
+      <a href="#pricing">الأسعار</a>
+      <a href="#contact">تواصل معنا</a>
+    </div>
+    <a href="#demo" class="nav-cta" style="display:inline-flex;">احجز عرضاً</a>
+    <button class="nav-burger" id="burger" aria-label="menu"><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">المميزات</a>
+    <a href="#pricing">الأسعار</a>
+    <a href="#contact">تواصل معنا</a>
+    <a href="#demo" style="color:var(--gold-deep); font-weight:600;">احجز عرضاً</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> مبنية في فلسطين، للمطاعم الفلسطينية</span>
+      <h1 class="hero-title">المطاعم الجادة لا تأخذ الطلبات على واتساب.</h1>
+      <p class="hero-sub">نقطة تتولى الجانب الرقمي كاملاً — من القائمة إلى المطبخ إلى التحليلات والزبائن.</p>
+      <div class="hero-ctas">
+        <a href="#demo" class="btn btn-primary">
+          احجز عرضاً مجانياً
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </a>
+        <a href="#how" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          شاهد كيف يعمل
+        </a>
+      </div>
+      <div class="trust">
+        <div class="trust-dots"><span></span><span></span><span></span><span></span></div>
+        <span>أول منصة طلبات مبنية للمطاعم الفلسطينية</span>
+      </div>
+    </div>
+
+    <!-- phone mock -->
+    <div class="phone-stage reveal" aria-label="Noqta menu preview">
+      <div class="qr-floater">
+        <svg class="qr-canvas" viewBox="0 0 100 100" aria-hidden="true">
+          <rect width="100" height="100" fill="#fffdf2"/>
+          <!-- programmatic-looking QR -->
+          <g fill="#283618">
+            <!-- finder patterns -->
+            <rect x="6" y="6" width="22" height="22"/>
+            <rect x="10" y="10" width="14" height="14" fill="#fffdf2"/>
+            <rect x="13" y="13" width="8" height="8"/>
+            <rect x="72" y="6" width="22" height="22"/>
+            <rect x="76" y="10" width="14" height="14" fill="#fffdf2"/>
+            <rect x="79" y="13" width="8" height="8"/>
+            <rect x="6" y="72" width="22" height="22"/>
+            <rect x="10" y="76" width="14" height="14" fill="#fffdf2"/>
+            <rect x="13" y="79" width="8" height="8"/>
+          </g>
+          <!-- pseudo random modules -->
+          <g id="qrMods" fill="#283618"></g>
+          <!-- center logo badge -->
+          <rect x="40" y="40" width="20" height="20" fill="#fffdf2"/>
+          <rect x="42" y="42" width="16" height="16" rx="3" fill="#bc6c25"/>
+          <text x="50" y="54" text-anchor="middle" font-family="IBM Plex Sans Arabic" font-weight="700" font-size="11" fill="#fefae0">ن</text>
+        </svg>
+        <div class="qr-label mono">scan · مسح</div>
+      </div>
+
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-top">
+            <span class="mono">9:41</span>
+            <span>●●●</span>
+          </div>
+          <div class="ph-header">
+            <div class="ph-shop">
+              <div class="ph-shop-logo">ه</div>
+              <div>
+                <div class="ph-shop-name">هوت تشيكن</div>
+                <div class="ph-shop-meta">طلب رقم #١٢</div>
+              </div>
+            </div>
+            <div class="ph-cart">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              <span class="badge mono" id="cartBadge">0</span>
+            </div>
+          </div>
+          <div class="ph-search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <span class="ph-search-ph">ابحث في القائمة...</span>
+          </div>
+          <div class="ph-list" id="phList"></div>
+          <div class="ph-footer">
+            <button class="ph-order-btn">
+              <span>اطلب الآن</span>
+              <span class="count"><span id="phTotal">0</span> ₪ · <span id="phCount">0</span> أصناف</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chip-floater">
+        <span class="pulse"></span>
+        <div>
+          <div class="num">طلب رقم #١٠٤٨</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PROBLEM ============ -->
+<section class="block problem" id="how" data-screen-label="Problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">المشكلة</span>
+      <h2 class="section-title">وقتك أغلى من أن تضيعه في الفوضى اليومية</h2>
+      <p class="section-kicker">معظم أصحاب المطاعم يقضون ساعات في إدارة الطلبات يدوياً، بدون أرقام واضحة، وبدون وقت للتفكير. نقطة تغيّر هذا.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="p-card reveal">
+        <div class="num">01</div>
+        <div class="p-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>تأخذ الطلبات على الواتساب يدوياً</h3>
+        <p>رسائل تتراكم وطلبات تضيع، وكل طلب يحتاج تأكيداً ذهاباً وإياباً قبل أن يصل إلى المطبخ.</p>
+      </div>
+      <div class="p-card reveal">
+        <div class="num">02</div>
+        <div class="p-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><path d="M15 9h5v5"/></svg>
+        </div>
+        <h3>لا تعرف أي الأصناف الأكثر مبيعاً</h3>
+        <p>في نهاية الشهر لا تعرف أي صنف يحقق ربحاً حقيقياً. بدون أرقام، كل قرار تسويقي مجرد تخمين.</p>
+      </div>
+      <div class="p-card reveal">
+        <div class="num">03</div>
+        <div class="p-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><rect x="4" y="9" width="16" height="9" rx="2"/><path d="M6 14h12v8H6z"/></svg>
+        </div>
+        <h3>الطلبات تضيع بين الطاولات والمطبخ</h3>
+        <p>ورقة تقع، نادل ينسى، والطبّاخ يسأل: "طلب طاولة كم؟" — والنتيجة زبون ينتظر ونقاش مع المطبخ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section class="block solution" data-screen-label="Solution">
+  <div class="wrap">
+    <div class="section-head reveal" style="position:relative; padding-top:10px;">
+      <span class="section-eyebrow">الحل</span>
+      <h2 class="section-title">مطعمك يعمل. أنت تركّز على ما يهم.</h2>
+      <p class="section-kicker">الطلبات تصل تلقائياً، المطبخ يطبع، التحليلات تتحدث عن نفسها — أنت تركّز على الطعام وخدمة زبائنك.</p>
+    </div>
+    <div class="sol-grid">
+      <div class="s-card reveal">
+        <div class="s-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1v1h-1zM14 20h1v1h-1zM20 20h1v1h-1z"/></svg>
+        </div>
+        <h3>قائمة QR يطلب منها زبونك مباشرة</h3>
+        <p>يمسح الزبون الرمز ويطلب مباشرة — بدون تطبيق وبدون تسجيل. الطلب يصلك بأقل من ١٠ ثوانٍ.</p>
+      </div>
+      <div class="s-card reveal">
+        <div class="s-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+        </div>
+        <h3>لوحة تحكّم تعرض مبيعاتك بالوقت الفعلي</h3>
+        <p>كل طلب، كل صنف، كل ساعة — على شاشة واحدة. اعرف متى تضيف طبّاخاً، ومتى تُطلق عرضاً.</p>
+      </div>
+      <div class="s-card reveal">
+        <div class="s-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M6 17h12v4H6z"/><circle cx="18" cy="13" r=".8" fill="currentColor"/></svg>
+        </div>
+        <h3>طابعة تطبع كل طلب تلقائياً في المطبخ</h3>
+        <p>الطلب يصل، الطابعة تشتغل. ورقة منظّمة فيها الطاولة، الأصناف، والملاحظات — بدون وسيط.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="block" id="features" data-screen-label="Features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">المميزات</span>
+      <h2 class="section-title">كل ما تحتاجه لتدير مطعمك الرقمي</h2>
+      <p class="section-kicker">منصة واحدة، ستة أدوات أساسية — بدون اشتراكات متعددة وبدون تكاملات معقّدة.</p>
+    </div>
+    <div class="features-grid">
+      <article class="f-card reveal">
+        <span class="f-index">01</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM19 19h2v2h-2zM14 19h2v2h-2zM19 14h2v2h-2z"/></svg>
+        </div>
+        <h3>قائمة QR</h3>
+        <p>عربي وإنجليزي، تحديث فوري للأسعار والأصناف بدون إعادة طباعة.</p>
+      </article>
+      <article class="f-card reveal">
+        <span class="f-index">02</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M6 17h12v4H6z"/></svg>
+        </div>
+        <h3>طباعة تلقائية</h3>
+        <p>كل طلب يصل للمطبخ مباشرة — مرتب، واضح، بدون نسيان.</p>
+      </article>
+      <article class="f-card reveal">
+        <span class="f-index">03</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+        </div>
+        <h3>تحليلات فورية</h3>
+        <p>مبيعات، أصناف أكثر طلباً، ساعات الذروة — قرارات مبنية على أرقام.</p>
+      </article>
+      <article class="f-card reveal">
+        <span class="f-index">04</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 17 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg>
+        </div>
+        <h3>برنامج الولاء</h3>
+        <p>نقاط وعروض للزبائن المميزين — يرجعون أكثر، يطلبون أكثر.</p>
+      </article>
+      <article class="f-card reveal">
+        <span class="f-index">05</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+        </div>
+        <h3>عربي وإنجليزي</h3>
+        <p>القائمة بلغتين تلقائياً — زبون المدينة وزبون السائح بنفس الراحة.</p>
+      </article>
+      <article class="f-card reveal">
+        <span class="f-index">06</span>
+        <div class="f-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>توصيل وبيكاب</h3>
+        <p>حدّد مناطق التوصيل بأسعار مخصّصة — مع إمكانية الاستلام من المطعم.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY NOQTA ============ -->
+<section class="block" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">لماذا نقطة؟</span>
+      <h2 class="section-title">مبنية في فلسطين، لفلسطين.</h2>
+      <p class="section-kicker" style="max-width: 72ch;">نقطة ليست منصة مستوردة تُرجمت للعربية. بنيناها من الصفر لمطاعم الضفة الغربية — بفهم حقيقي لكيف تعمل المطاعم هنا، وما يحتاجه أصحابها فعلاً. من طرق الدفع إلى مناطق التوصيل إلى دعم العربية والإنجليزية — كل تفصيل فكّرنا فيه محلياً.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div class="f-card reveal" style="text-align: center;">
+        <div class="f-glyph" style="margin: 0 auto 16px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-size: 17px; margin: 0 0 8px;">بيانات مطعمك لك وحدك</h3>
+        <p style="font-size: 14px;">لا نشارك بياناتك مع أي طرف ثالث. زبائنك وطلباتك ملكك أنت.</p>
+      </div>
+      <div class="f-card reveal" style="text-align: center;">
+        <div class="f-glyph" style="margin: 0 auto 16px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size: 17px; margin: 0 0 8px;">دعم بشري حقيقي</h3>
+        <p style="font-size: 14px;">فريقنا يتواصل معك مباشرة — لا روبوتات، لا تذاكر دعم، لا انتظار.</p>
+      </div>
+      <div class="f-card reveal" style="text-align: center;">
+        <div class="f-glyph" style="margin: 0 auto 16px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+        </div>
+        <h3 style="font-size: 17px; margin: 0 0 8px;">مصمّمة للسوق المحلي</h3>
+        <p style="font-size: 14px;">عربي وإنجليزي، شيكل إسرائيلي، مناطق التوصيل الفلسطينية — كل شيء جاهز.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="block pricing" id="pricing" data-screen-label="Pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">العرض</span>
+      <h2 class="section-title">عرض المؤسسين</h2>
+      <p class="section-kicker">للمطاعم التي ستكبر معنا. سنة كاملة بسعر واحد، وكل الأدوات مفتوحة من اليوم الأول.</p>
+    </div>
+    <div class="price-card reveal">
+      <span class="price-badge"><span class="flicker"></span> عرض المؤسسين · أماكن محدودة</span>
+      <p style="font-size: 14px; color: var(--olive); margin: 0 0 16px; font-weight: 500;">أقل من تكلفة موظف لشهر واحد — لسنة كاملة من الإدارة الرقمية.</p>
+      <div class="price-head">
+        <div class="price-main"><span class="cur mono">$</span><span class="mono">1000</span></div>
+        <div>
+          <div class="price-period">مرة واحدة · سنة كاملة من الخدمة</div>
+          <div class="price-tag">إعداد كامل + دعم واتساب مباشر مشمولان</div>
+        </div>
+      </div>
+      <ul class="price-list">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> قائمة QR بلغتين</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> طابعة مطبخ ذكية</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> لوحة تحليلات</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> برنامج ولاء</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> توصيل وبيكاب</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> دعم واتساب مباشر</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> تدريب الفريق</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> تركيب في الموقع</li>
+      </ul>
+      <p style="text-align:center; color:var(--gold-deep); font-size:14px; margin-top:18px; font-weight:600;">⚡️ عدد محدود من مطاعم المؤسسين</p>
+      <a href="#demo" class="price-cta" style="margin-top:18px;">احجز مكانك الآن</a>
+      <p class="price-after">بعد انتهاء العرض: اشتراك شهري بأسعار قياسية</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO FORM ============ -->
+<section class="block demo" id="demo" data-screen-label="Demo Form">
+  <div class="wrap demo-grid">
+    <div class="demo-copy reveal">
+      <span class="section-eyebrow" style="color: var(--gold-soft); background: rgba(221,161,94,.15);">احجز عرضاً</span>
+      <h2>تحدّث معنا عن مطعمك</h2>
+      <p>املأ البيانات التالية وسيتصل بك أحد مستشاري نقطة خلال ٢٤ ساعة بمكالمة قصيرة لفهم احتياجاتك وتجهيز عرض مخصّص.</p>
+      <ul class="demo-bullets">
+        <li><span class="d"></span> جلسة تعريفية قصيرة عبر الهاتف</li>
+        <li><span class="d"></span> عرض حيّ على بيانات مطعمك</li>
+        <li><span class="d"></span> خطّة إطلاق خلال أسبوع</li>
+      </ul>
+    </div>
+
+    <div class="form-card reveal" id="formCard" id="contact">
+      <div class="form-body">
+        <h3>احجز عرضاً مجانياً</h3>
+        <p class="sub">٣ حقول فقط. لا رسائل مزعجة.</p>
+        <form id="demoForm" novalidate>
+          <label class="field" id="fld-name">
+            <label>اسمك</label>
+            <input type="text" name="name" placeholder="مثال: أحمد خليل" autocomplete="name" />
+            <div class="err-msg">الرجاء إدخال اسمك</div>
+          </label>
+          <label class="field" id="fld-rest">
+            <label>اسم المطعم</label>
+            <input type="text" name="restaurant" placeholder="مثال: مطعم المنارة" />
+            <div class="err-msg">الرجاء إدخال اسم المطعم</div>
+          </label>
+          <label class="field" id="fld-phone">
+            <label>رقم الواتساب</label>
+            <input type="tel" name="phone" placeholder="05X XXX XXXX" dir="ltr" />
+            <div class="err-msg">رقم غير صحيح</div>
+          </label>
+          <button type="submit" class="submit" id="submitBtn">
+            <span>أرسل طلبك</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          </button>
+          <p class="form-note">سيتواصل معك فريق نقطة خلال ٢٤ ساعة</p>
+        </form>
+      </div>
+
+      <div class="success-state">
+        <div class="ok">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4>وصلنا طلبك!</h4>
+        <p>سيتواصل معك مستشار نقطة على الواتساب خلال ٢٤ ساعة.<br/>شكراً لثقتك.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top" style="font-size:22px;">
+          <span class="logo-mark" style="width:30px;height:30px;font-size:15px;">ن</span>
+          <span>نقطة</span>
+        </a>
+        <p>نقطة — منصة الطلبات والقوائم الرقمية للمطاعم الفلسطينية.</p>
+      </div>
+      <div>
+        <h4>الشركة</h4>
+        <ul>
+          <li><a href="#features">المميزات</a></li>
+          <li><a href="#pricing">الأسعار</a></li>
+          <li><a href="#demo">احجز عرضاً</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>الدعم</h4>
+        <ul>
+          <li><a href="#">الخصوصية</a></li>
+          <li><a href="#">الشروط والأحكام</a></li>
+          <li><a href="#" id="contact">تواصل معنا</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© ٢٠٢٦ نقطة. جميع الحقوق محفوظة.</span>
+      <span class="powered">Powered by <b>AtharCo</b></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  /* ---- QR filler ---- */
+  (function fillQR(){
+    const g = document.getElementById('qrMods');
+    if(!g) return;
+    // deterministic pseudo-random based on coords
+    function h(x,y){ return ((x*73856093) ^ (y*19349663)) & 0xffff; }
+    for(let x=0; x<100; x+=4){
+      for(let y=0; y<100; y+=4){
+        // skip finder + logo zones
+        const inFinder = (x<30 && y<30) || (x>68 && y<30) || (x<30 && y>68);
+        const inLogo = (x>=38 && x<=60 && y>=38 && y<=60);
+        if(inFinder || inLogo) continue;
+        if(h(x,y) % 7 < 3){
+          const r = document.createElementNS("http://www.w3.org/2000/svg","rect");
+          r.setAttribute("x", x+1); r.setAttribute("y", y+1);
+          r.setAttribute("width", 2.5); r.setAttribute("height", 2.5);
+          g.appendChild(r);
+        }
+      }
+    }
+  })();
+
+  /* ---- reveal on scroll ---- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  /* ---- mobile nav ---- */
+  const burger = document.getElementById('burger');
+  const mm = document.getElementById('mobileMenu');
+  if(burger){
+    burger.addEventListener('click', ()=> mm.classList.toggle('open'));
+    mm.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mm.classList.remove('open')));
+  }
+
+  /* ---- phone interactivity (tab switching + add to cart) ---- */
+  const MENU = {
+    chicken: {
+      groups: [
+        { cat: 'دجاج', items: [
+          { n:'ساندويش دجاج مقلي كلاسيك', d:'دجاج مقلي على الطريقة الكلاسيكية مع الصلصة', p:28, bg:'repeating-linear-gradient(45deg,#dcc291 0 6px,#cfb282 6px 12px)'},
+          { n:'دجاج ناشفيل حار', d:'دجاج مقلي بتتبيلة ناشفيل الحارة', p:30, bg:'repeating-linear-gradient(45deg,#c77447 0 6px,#b56434 6px 12px)'},
+          { n:'دلو دجاج ٨ قطع', d:'٨ قطع دجاج مقلي مقرمش', p:85, bg:'repeating-linear-gradient(45deg,#c7a277 0 6px,#b89063 6px 12px)'},
+        ]},
+        { cat: 'الأطباق الجانبية', items: [
+          { n:'بطاطا متبلة', d:'بطاطا مقلية متبّلة بالبهارات', p:12, bg:'repeating-linear-gradient(45deg,#e9d5ba 0 6px,#dfc7a8 6px 12px)'},
+        ]},
+        { cat: 'مشروبات', items: [
+          { n:'مشروب غازي', d:'٣٣٠ مل', p:8, bg:'repeating-linear-gradient(45deg,#b88360 0 6px,#a77152 6px 12px)'},
+        ]},
+      ]
+    },
+    sides: {
+      groups: [
+        { cat: 'الأطباق الجانبية', items: [
+          { n:'بطاطا متبلة', d:'بطاطا مقرمشة بتتبيلة المطعم', p:12, bg:'repeating-linear-gradient(45deg,#e9d5ba 0 6px,#dfc7a8 6px 12px)'},
+          { n:'بطاطا بالجبنة', d:'بطاطا مع صوص جبنة شيدر', p:15, bg:'repeating-linear-gradient(45deg,#efe1a8 0 6px,#e4d493 6px 12px)'},
+          { n:'كول سلاو', d:'سلطة ملفوف طازجة', p:10, bg:'repeating-linear-gradient(45deg,#d6dba7 0 6px,#c6cc95 6px 12px)'},
+        ]}
+      ]
+    },
+    drinks: {
+      groups: [
+        { cat: 'مشروبات', items: [
+          { n:'مشروب غازي', d:'علبة ٣٣٠ مل', p:8, bg:'repeating-linear-gradient(45deg,#b88360 0 6px,#a77152 6px 12px)'},
+          { n:'عصير ليمون طازج', d:'ليمون ونعناع', p:12, bg:'repeating-linear-gradient(45deg,#d6dba7 0 6px,#c6cc95 6px 12px)'},
+          { n:'ماء معدني', d:'قارورة ٥٠٠ مل', p:5, bg:'repeating-linear-gradient(45deg,#e7dfb0 0 6px,#efe7b8 6px 12px)'},
+        ]}
+      ]
+    }
+  };
+  const phList = document.getElementById('phList');
+  const phTotal = document.getElementById('phTotal');
+  const phCount = document.getElementById('phCount');
+  const cartBadge = document.getElementById('cartBadge');
+  let cart = 0, total = 0;
+
+  function renderMenu(key){
+    const menu = MENU[key] || MENU.chicken;
+    phList.innerHTML = '';
+    menu.groups.forEach(group=>{
+      const h = document.createElement('div');
+      h.className = 'ph-cat-header';
+      h.textContent = group.cat;
+      phList.appendChild(h);
+      group.items.forEach(it=>{
+        const row = document.createElement('div');
+        row.className = 'ph-item';
+        row.innerHTML = `
+          <div class="ph-item-img" style="background:${it.bg};"></div>
+          <div class="ph-item-info">
+            <div class="n">${it.n}</div>
+            <div class="d">${it.d}</div>
+          </div>
+          <div class="ph-item-price">
+            <span class="p">₪ ${it.p}</span>
+            <button class="ph-add" data-p="${it.p}" aria-label="add">+</button>
+          </div>`;
+        phList.appendChild(row);
+      });
+    });
+    phList.querySelectorAll('.ph-add').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const p = parseInt(btn.dataset.p,10);
+        cart += 1; total += p;
+        updateCart();
+        btn.style.transform='scale(1.15)';
+        setTimeout(()=> btn.style.transform='', 150);
+      });
+    });
+  }
+  function updateCart(){
+    phCount.textContent = cart;
+    phTotal.textContent = total;
+    cartBadge.textContent = cart;
+  }
+  renderMenu('chicken');
+
+  /* ---- form validation ---- */
+  const form = document.getElementById('demoForm');
+  const card = document.getElementById('formCard');
+  const submit = document.getElementById('submitBtn');
+
+  function setErr(id, on){ document.getElementById(id).classList.toggle('error', on); }
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fd = new FormData(form);
+    const name = (fd.get('name')||'').toString().trim();
+    const rest = (fd.get('restaurant')||'').toString().trim();
+    const phone = (fd.get('phone')||'').toString().trim();
+    let ok = true;
+    if(name.length < 2){ setErr('fld-name', true); ok=false; } else setErr('fld-name', false);
+    if(rest.length < 2){ setErr('fld-rest', true); ok=false; } else setErr('fld-rest', false);
+    const phoneClean = phone.replace(/[\s-]/g,'');
+    if(!/^[+\d]?\d{7,15}$/.test(phoneClean)){ setErr('fld-phone', true); ok=false; } else setErr('fld-phone', false);
+    if(!ok) return;
+
+    submit.disabled = true;
+    submit.innerHTML = '<span>جاري الإرسال…</span>';
+    setTimeout(()=>{
+      const fd = new FormData(form);
+      const name = (fd.get('name')||'').toString().trim();
+      const rest = (fd.get('restaurant')||'').toString().trim();
+      const phone = (fd.get('phone')||'').toString().trim();
+      const msg = encodeURIComponent(`مرحباً، أنا ${name} من مطعم ${rest}. أريد حجز عرض تجريبي لنقطة. رقمي: ${phone}`);
+      window.open(`https://wa.me/970599488371?text=${msg}`, '_blank');
+      card.classList.add('success');
+    }, 700);
+  });
+</script>
+</body>
+</html>
